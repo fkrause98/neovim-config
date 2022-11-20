@@ -122,11 +122,72 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
-
+  use  "lukas-reineke/cmp-rg" 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use { 
+    "ggandor/leap.nvim",
+    config = function()
+      require('leap').add_default_mappings()
+    end 
+  }
+  use {
+    "terrortylor/nvim-comment",
+    config = function()
+      require('nvim_comment').setup(
+      {
+        {
+          -- Linters prefer comment and line to have a space in between markers
+          marker_padding = true,
+          -- should comment out empty or whitespace only lines
+          comment_empty = true,
+          -- trim empty comment whitespace
+          comment_empty_trim_whitespace = true,
+          -- Should key mappings be created
+          create_mappings = true,
+          -- Normal mode mapping left hand side
+          line_mapping = "gcc",
+          -- Visual/Operator mapping left hand side
+          operator_mapping = "gc",
+          -- text object mapping, comment chunk,
+          comment_chunk_text_object = "ic",
+          -- Hook function to call before commenting takes place
+          hook = nil
+        }
+      }
 
+      )
+    end
+  }
+  use {
+    "ggandor/flit.nvim",
+    config = function()
+      require('flit').setup {
+        keys = { f = 'f', F = 'F', t = 't', T = 'T' },
+        -- A string like "nv", "nvo", "o", etc.
+        labeled_modes = "v",
+        multiline = true,
+        -- Like `leap`s similar argument (call-specific overrides).
+        -- E.g.: opts = { equivalence_classes = {} }
+        opts = {}
+      }
+    end
+  }
+  -- use {
+  --   "ggandor/flit.nvim" 
+  --   config = function()
+  --     require('flit').setup {
+  --       keys = { f = 'f', F = 'F', t = 't', T = 'T' },
+  --       -- A string like "nv", "nvo", "o", etc.
+  --       labeled_modes = "v",
+  --       multiline = true,
+  --       -- Like `leap`s similar argument (call-specific overrides).
+  --       -- E.g.: opts = { equivalence_classes = {} }
+  --       opts = {}
+  --     }
+  --   end
+  -- }
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
