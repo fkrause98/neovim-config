@@ -114,6 +114,8 @@ return packer.startup(function(use)
   use 'airblade/vim-gitgutter' -- Git hints
   use 'justinmk/vim-sneak' -- Better text navigation
   use "lunarvim/darkplus.nvim" -- Colors :)
+  use "drewtempelmeyer/palenight.vim" -- 
+  use "folke/tokyonight.nvim"
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
