@@ -123,8 +123,10 @@ cmp.setup {
 --  documentation = {
  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   --},
+  view = {
+    entries = "native"
+  },
   experimental = {
     ghost_text = true,
-    native_menu = true,
   },
 }
