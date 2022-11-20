@@ -122,10 +122,9 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
   use  "lukas-reineke/cmp-rg" 
-  -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
   use { 
     "ggandor/leap.nvim",
     config = function()
@@ -174,20 +173,16 @@ return packer.startup(function(use)
       }
     end
   }
-  -- use {
-  --   "ggandor/flit.nvim" 
-  --   config = function()
-  --     require('flit').setup {
-  --       keys = { f = 'f', F = 'F', t = 't', T = 'T' },
-  --       -- A string like "nv", "nvo", "o", etc.
-  --       labeled_modes = "v",
-  --       multiline = true,
-  --       -- Like `leap`s similar argument (call-specific overrides).
-  --       -- E.g.: opts = { equivalence_classes = {} }
-  --       opts = {}
-  --     }
-  --   end
-  -- }
+  -- snippets
+  use "L3MON4D3/LuaSnip" --snippet engine
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+
+  -- LSP
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
