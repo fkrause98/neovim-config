@@ -26,6 +26,7 @@ vim.cmd [[
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
+  vim.notify("Could not require packer")
   return
 end
 
@@ -43,10 +44,75 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+  use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
+  use "TimUntersberger/neogit" -- Magit-like git manager
+  use "jiangmiao/auto-pairs" -- Autocomplete brackets and parens
+  use "tpope/vim-endwise" -- Auto complete language keyword pairs
+  use({                   
+    "kylechui/nvim-surround", -- Text objects for surrounding
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({})
+    end
+  })
+  use {
+    "andymass/vim-matchup", -- Jump around matching keywords with %
+    setup = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end
+  }
+  use {
+    "karb94/neoscroll.nvim",  -- Smooth scrolling animations
+    config = function()
+      require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil,       -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,             -- Function to run after the scrolling animation ends
+        performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+      })
+    end
+  }
+  use {
+    'nvim-lualine/lualine.nvim', -- Simple status line
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine').setup{
+        options = {
+          icons_enabled = false,
+          theme = 'auto'
+        }
+      }
+    end
+  }
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use {
+    "lukas-reineke/indent-blankline.nvim", -- Indent lines
+    config = function()
+      require("indent_blankline").setup{
+        show_current_context = true,
+        show_current_context_start = true
+      }
+    end
+  }
+  use 'airblade/vim-gitgutter' -- Git hints
+  use 'justinmk/vim-sneak' -- Better text navigation
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
