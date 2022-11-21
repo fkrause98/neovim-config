@@ -1,9 +1,23 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
+local telescope_ok, telescope = pcall(require, "telescope")
+if not telescope_ok then
   return
 end
 
+local frecency_ok, _= pcall(require, "frecency")
+if not frecency_ok then
+  return
+end
+local fzf_ok, _ = pcall(require, "fzf")
+if not fzf_ok then
+  return
+end
+local media_files_ok, _ = pcall(require, "media_files")
+if not media_files_ok then
+  return
+end
+telescope.load_extension('media_files')
 telescope.load_extension("frecency")
+telescope.load_extension("fzf")
 
 local actions = require "telescope.actions"
 
