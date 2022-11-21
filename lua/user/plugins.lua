@@ -48,7 +48,7 @@ return packer.startup(function(use)
   use "TimUntersberger/neogit" -- Magit-like git manager
   use "jiangmiao/auto-pairs" -- Autocomplete brackets and parens
   use "tpope/vim-endwise" -- Auto complete language keyword pairs
-  use({                   
+  use({
     "kylechui/nvim-surround", -- Text objects for surrounding
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
@@ -181,10 +181,16 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  })
+
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
-
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
