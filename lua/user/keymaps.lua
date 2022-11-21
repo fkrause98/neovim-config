@@ -92,7 +92,7 @@ keymap("i", "<A-f>", "<C-S-Right>", opts)
 -- "<cmd>lua require('telescope.builtin').buffers()<cr>"
 -- keymap("n", "<leader>bb", list_buffers_command, opts)
 keymap("n", "<leader>bb", "<cmd>lua require'telescope.builtin'.buffers()<cr>", opts)
-keymap("n", "<leader>ff", "<cmd>lua require'user.telescope-config'.project_files()<cr>", opts)
+keymap("n", "<leader>ff", "<cmd>lua require'user.telescope-config'.find_files()<cr>", opts)
 keymap("n", "<leader>fr", "<cmd>Telescope frecency previewer=false<CR>", opts)
 keymap("n", "<leader>sp", "<Cmd>Telescope live_grep <CR>", opts)
 keymap("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find <cr>", opts)

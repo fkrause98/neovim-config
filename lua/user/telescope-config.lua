@@ -1,20 +1,12 @@
 local telescope_ok, telescope = pcall(require, "telescope")
 if not telescope_ok then
+  vim.cmd("echom 'Could not load telescope'")
   return
 end
 
-local frecency_ok, _= pcall(require, "frecency")
-if not frecency_ok then
-  return
-end
-local fzf_ok, _ = pcall(require, "fzf")
-if not fzf_ok then
-  return
-end
-local media_files_ok, _ = pcall(require, "media_files")
-if not media_files_ok then
-  return
-end
+local builtin = require('telescope.builtin')
+local themes = require('telescope.themes')
+
 telescope.load_extension('media_files')
 telescope.load_extension("frecency")
 telescope.load_extension("fzf")
@@ -27,7 +19,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-
+    preview = false,
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -123,11 +115,16 @@ telescope.setup {
   },
 }
 
-local M = {}
-vim.fn.system('git rev-parse --is-inside-work-tree')
-M.project_files = function()
-  local opts = require('telescope.themes').get_dropdown({ previewer = false })
-  require"telescope.builtin".find_files(opts)
-end
+-- M.find_files = function()
+--   require"telescope.builtin".find_files()
+-- end
 -- M.list_buffers_command = require"telescope.builtin".buffers
+M = {
+  find_files = function()
+    builtin.find_files(themes.get_ivy())
+  end,
+  buffers = function()
+    builtin.buffers(themes.get_ivy())
+  end,
+}
 return M

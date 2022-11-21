@@ -200,9 +200,6 @@ return packer.startup(function(use)
   -- Put this at the end after all plugins
   use {
     "nvim-telescope/telescope-frecency.nvim" ,
-    config = function()
-      require"telescope".load_extension("frecency")
-    end,
     requires = {"kkharji/sqlite.lua"}
   }
   use "gelguy/wilder.nvim"
