@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-telescope.load_extension('media_files')
+telescope.load_extension("frecency")
 
 local actions = require "telescope.actions"
 
@@ -89,12 +89,18 @@ telescope.setup {
     -- builtin picker
   },
   extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+    },
     media_files = {
-        -- filetypes whitelist
-        -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-        filetypes = {"png", "webp", "jpg", "jpeg"},
-        find_cmd = "rg" -- find command (defaults to `fd`)
-      }
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
+    }
     -- Your extension configuration goes here:
     -- extension_name = {
     --   extension_config_key = value,
@@ -104,14 +110,10 @@ telescope.setup {
 }
 
 local M = {}
-  vim.fn.system('git rev-parse --is-inside-work-tree')
+vim.fn.system('git rev-parse --is-inside-work-tree')
 M.project_files = function()
   local opts = require('telescope.themes').get_dropdown({ previewer = false })
-  if vim.v.shell_error == 0 then
-    require"telescope.builtin".git_files(opts)
-    else
-      require"telescope.builtin".find_files(opts)
-    end
-  end
+  require"telescope.builtin".find_files(opts)
+end
 -- M.list_buffers_command = require"telescope.builtin".buffers
 return M

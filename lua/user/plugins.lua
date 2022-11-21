@@ -181,18 +181,31 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 
-  use({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  })
-
+  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  -- Sidebar 
+  use "sidebar-nvim/sidebar.nvim"
+  use "nixprime/cpsm"
+  -- use {
+  --   "gelguy/wilder.nvim"
+  --   config = function()
+  --    
+  --   end
+  -- }
+  use 'nvim-tree/nvim-web-devicons'
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
+  use {
+    "nvim-telescope/telescope-frecency.nvim" ,
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"kkharji/sqlite.lua"}
+  }
+  use "gelguy/wilder.nvim"
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
