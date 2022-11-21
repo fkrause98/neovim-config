@@ -39,3 +39,17 @@ vim.opt.shortmess:append "c"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+---Highlight yanked text
+local ag = vim.api.nvim_create_augroup
+local au = vim.api.nvim_create_autocmd
+
+---Highlight yanked text
+--
+au('TextYankPost', {
+  group = ag('yank_highlight', {}),
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup='IncSearch', timeout=100 }
+  end,
+})
