@@ -5,6 +5,7 @@ require "user.utils"
 require "user.colorscheme"
 require "user.cmp"
 require "user.lsp"
-require "user.telescope"
+require "user.telescope-config"
 require "user.lsp_lines"
+require "user.wilder"
 
