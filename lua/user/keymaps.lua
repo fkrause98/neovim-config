@@ -87,5 +87,14 @@ keymap("i", "<A-f>", "<C-S-Right>", opts)
 
 -- Telescope
 --keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
-keymap("n", "<leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+-- local find_files_command = telescope_config.project_files
+-- local list_buffers_command = telescope_config.list_buffers_command()
+-- "<cmd>lua require('telescope.builtin').buffers()<cr>"
+-- keymap("n", "<leader>bb", list_buffers_command, opts)
+keymap("n", "<leader>bb", "<cmd>lua require'telescope.builtin'.buffers()<cr>", opts)
+keymap("n", "<leader>ff", "<cmd>lua require'user.telescope-config'.project_files()<cr>", opts)
+keymap("n", "<leader>fr", "<cmd>Telescope frecency previewer=false<CR>", opts)
+keymap("n", "<leader>sp", "<Cmd>Telescope live_grep <CR>", opts)
+keymap("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find <cr>", opts)
+keymap("n", "<leader>si", "<cmd>Telescope lsp_document_symbols symbols=module,function,object<cr>", opts)
+-- keymap("n", "<leader>sp", "<cmd>lua require('telescope.builtin').grep_string()<CR>")

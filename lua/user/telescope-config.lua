@@ -32,8 +32,8 @@ telescope.setup {
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
 
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
+        ["<C-u>"] = false,
+        -- ["<C-d>"] = actions.preview_scrolling_down,
 
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
@@ -102,3 +102,16 @@ telescope.setup {
     -- please take a look at the readme of the extension you want to configure
   },
 }
+
+local M = {}
+  vim.fn.system('git rev-parse --is-inside-work-tree')
+M.project_files = function()
+  local opts = require('telescope.themes').get_dropdown({ previewer = false })
+  if vim.v.shell_error == 0 then
+    require"telescope.builtin".git_files(opts)
+    else
+      require"telescope.builtin".find_files(opts)
+    end
+  end
+-- M.list_buffers_command = require"telescope.builtin".buffers
+return M
