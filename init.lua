@@ -8,4 +8,4 @@ require "user.lsp"
 require "user.telescope-config"
 require "user.lsp_lines"
 require "user.wilder"
-
+require "user.nvim-tree"

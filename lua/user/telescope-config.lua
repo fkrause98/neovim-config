@@ -4,14 +4,15 @@ if not telescope_ok then
   return
 end
 
-local builtin = require('telescope.builtin')
-local themes = require('telescope.themes')
 
 telescope.load_extension('media_files')
 telescope.load_extension("frecency")
 telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
 
 local actions = require "telescope.actions"
+local builtin = require('telescope.builtin')
+local themes = require('telescope.themes')
 
 telescope.setup {
   defaults = {
@@ -106,12 +107,25 @@ telescope.setup {
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
       filetypes = {"png", "webp", "jpg", "jpeg"},
       find_cmd = "rg" -- find command (defaults to `fd`)
-    }
+    },
     -- Your extension configuration goes here:
     -- extension_name = {
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
   },
 }
 
@@ -119,12 +133,25 @@ telescope.setup {
 --   require"telescope.builtin".find_files()
 -- end
 -- M.list_buffers_command = require"telescope.builtin".buffers
+local ivy_theme = themes.get_ivy({layout_config = {height = 15}})
 M = {
   find_files = function()
-    builtin.find_files(themes.get_ivy())
+    vim.fn.system('git rev-parse --is-inside-work-tree')
+    builtin.find_files(ivy_theme)
+  end,
+  project_find_files = function()
+    vim.fn.system('git rev-parse --is-inside-work-tree')
+    if vim.v.shell_error == 0 then
+      builtin.git_files(ivy_theme)
+    else
+      vim.cmd("echom 'Not in a git folder'")
+    end
   end,
   buffers = function()
-    builtin.buffers(themes.get_ivy())
+    builtin.buffers(ivy_theme)
   end,
+  buffer_search = function()
+    builtin.current_buffer_fuzzy_find(ivy_theme)
+  end
 }
 return M

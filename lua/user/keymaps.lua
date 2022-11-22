@@ -28,6 +28,7 @@ keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
 keymap("n", "<leader>wk", "<C-w>k", opts)
 keymap("n", "<leader>wl", "<C-w>l", opts)
+keymap("n", "<leader>ww", "<C-w><C-w>", opts)
 -- Emacs-like window splitting
 keymap("n", "<C-x>3", ":vsplit<CR>", opts)
 keymap("n", "<C-x>2", ":split<CR>", opts)
@@ -93,8 +94,33 @@ keymap("i", "<A-f>", "<C-S-Right>", opts)
 -- keymap("n", "<leader>bb", list_buffers_command, opts)
 keymap("n", "<leader>bb", "<cmd>lua require'telescope.builtin'.buffers()<cr>", opts)
 keymap("n", "<leader>ff", "<cmd>lua require'user.telescope-config'.find_files()<cr>", opts)
+keymap("n", "<leader>pf", "<cmd>lua require'user.telescope-config'.project_find_files()<cr>", opts)
 keymap("n", "<leader>fr", "<cmd>Telescope frecency previewer=false<CR>", opts)
 keymap("n", "<leader>sp", "<Cmd>Telescope live_grep <CR>", opts)
-keymap("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find <cr>", opts)
+keymap("n", "<leader>ss", "<cmd>lua require'user.telescope-config'.buffer_search()<cr>", opts)
 keymap("n", "<leader>si", "<cmd>Telescope lsp_document_symbols symbols=module,function,object<cr>", opts)
 -- keymap("n", "<leader>sp", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
+
+
+
+-- Nvim-tree
+keymap("n", "<leader>op", "<cmd>lua require('nvim-tree.api').tree.toggle(false, true)<cr>", opts)
+
+vim.keymap.set("n", "<leader>cX", "<cmd>TroubleToggle<cr>",
+  opts
+)
+-- vim.keymap.set("n", "<leader>cX", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+--   opts
+-- )
+vim.keymap.set("n", "<leader>cx", "<cmd>TroubleToggle document_diagnostics<cr>",
+  opts
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  opts
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  opts
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  opts
+)

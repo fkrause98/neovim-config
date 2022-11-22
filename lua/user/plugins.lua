@@ -17,10 +17,10 @@ end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost plugins.lua source <afile> | PackerSync
+augroup end
 ]]
 
 -- Use a protected call so we don't error out on first use
@@ -69,7 +69,7 @@ return packer.startup(function(use)
         -- All these keys will be mapped to their corresponding default scrolling animation
         mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        hide_cursor = true,          -- Hide cursor while scrolling
+        hide_cursor = false,          -- Hide cursor while scrolling
         stop_eof = true,             -- Stop at <EOF> when scrolling downwards
         respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
         cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
@@ -203,6 +203,19 @@ return packer.startup(function(use)
     requires = {"kkharji/sqlite.lua"}
   }
   use "gelguy/wilder.nvim"
+  use "nvim-tree/nvim-tree.lua"
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use { "nvim-telescope/telescope-file-browser.nvim" }
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
