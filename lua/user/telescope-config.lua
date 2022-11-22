@@ -152,6 +152,9 @@ M = {
   end,
   buffer_search = function()
     builtin.current_buffer_fuzzy_find(ivy_theme)
+  end,
+  recent_files = function()
+    telescope.extensions.frecency.frecency(ivy_theme)
   end
-}
+  }
 return M

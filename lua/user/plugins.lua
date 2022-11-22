@@ -166,7 +166,7 @@ return packer.startup(function(use)
         keys = { f = 'f', F = 'F', t = 't', T = 'T' },
         -- A string like "nv", "nvo", "o", etc.
         labeled_modes = "v",
-        multiline = true,
+        multiline = false,
         -- Like `leap`s similar argument (call-specific overrides).
         -- E.g.: opts = { equivalence_classes = {} }
         opts = {}
@@ -216,6 +216,14 @@ return packer.startup(function(use)
     end
   }
   use { "nvim-telescope/telescope-file-browser.nvim" }
+  -- Tree sitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
