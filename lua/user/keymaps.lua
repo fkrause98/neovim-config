@@ -98,7 +98,7 @@ keymap("n", "<leader>pf", "<cmd>lua require'user.telescope-config'.project_find_
 keymap("n", "<leader>fr", "<cmd>lua require'user.telescope-config'.recent_files()<cr>", opts)
 -- keymap("n", "<leader>fr", "<cmd>Telescope frecency previewer=false<CR>", opts)
 keymap("n", "<leader>sp", "<Cmd>Telescope live_grep <CR>", opts)
-keymap("n", "<leader>ss", "<cmd>lua require'user.telescope-config'.buffer_search()<cr>", opts)
+keymap("n", "<leader>ss", "<cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find(require'telescope.themes'.get_ivy({layout_config={height=15}}))<cr>", opts)
 keymap("n", "<leader>si", "<cmd>Telescope lsp_document_symbols symbols=module,function,object<cr>", opts)
 -- keymap("n", "<leader>sp", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
 
@@ -106,7 +106,8 @@ keymap("n", "<leader>si", "<cmd>Telescope lsp_document_symbols symbols=module,fu
 
 -- Nvim-tree
 keymap("n", "<leader>op", "<cmd>lua require('nvim-tree.api').tree.toggle(false, true)<cr>", opts)
-
+-- Restore file
+keymap("n", "<leader>br", "<cmd>e!<cr>", opts)
 vim.keymap.set("n", "<leader>cX", "<cmd>TroubleToggle<cr>",
   opts
 )

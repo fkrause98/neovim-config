@@ -150,11 +150,16 @@ M = {
   buffers = function()
     builtin.buffers(ivy_theme)
   end,
-  buffer_search = function()
-    builtin.current_buffer_fuzzy_find(ivy_theme)
-  end,
+  -- Do not use this, as it does not work as you would 
+  -- expect.
+  -- buffer_search = function()
+  --   builtin.current_buffer_fuzzy_find(ivy_theme)
+  -- end,
   recent_files = function()
     telescope.extensions.frecency.frecency(ivy_theme)
+  end,
+  lsp_symbols = function()
+    builtin.lsp_document_symbols({})
   end
   }
 return M
