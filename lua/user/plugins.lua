@@ -22,7 +22,6 @@ autocmd!
 autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup end
 ]]
-
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
@@ -181,7 +180,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 
-  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+  -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
@@ -224,6 +223,10 @@ return packer.startup(function(use)
             ts_update()
         end,
     }
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'lewis6991/gitsigns.nvim'
+  use  'smithbm2316/centerpad.nvim' 
+  use 'folke/which-key.nvim'
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

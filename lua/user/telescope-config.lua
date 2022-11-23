@@ -159,7 +159,7 @@ M = {
     telescope.extensions.frecency.frecency(ivy_theme)
   end,
   lsp_symbols = function()
-    builtin.lsp_document_symbols({})
+    builtin.lsp_document_symbols(ivy_theme)
   end
   }
 return M

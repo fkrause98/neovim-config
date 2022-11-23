@@ -45,6 +45,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>bl", ":bprevious<CR>", opts)
 -- Git
 keymap("n", "<leader>gg", ":Neogit<CR>", opts)
+-- keymap("n", "<leader>gb", ":Gitsigns toggle_current_line_blame <CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -92,7 +93,7 @@ keymap("i", "<A-f>", "<C-S-Right>", opts)
 -- local list_buffers_command = telescope_config.list_buffers_command()
 -- "<cmd>lua require('telescope.builtin').buffers()<cr>"
 -- keymap("n", "<leader>bb", list_buffers_command, opts)
-keymap("n", "<leader>bb", "<cmd>lua require'telescope.builtin'.buffers()<cr>", opts)
+keymap("n", "<leader>bb", "<cmd>lua require'telescope.builtin'.buffers(require'telescope.themes'.get_ivy({layout_config = {height = 15}}))<cr>", opts)
 keymap("n", "<leader>ff", "<cmd>lua require'user.telescope-config'.find_files()<cr>", opts)
 keymap("n", "<leader>pf", "<cmd>lua require'user.telescope-config'.project_find_files()<cr>", opts)
 keymap("n", "<leader>fr", "<cmd>lua require'user.telescope-config'.recent_files()<cr>", opts)
